@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Story 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffe4ec, #fff5f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  width: 95%;
+  max-width: 420px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.yes { background: #4CAF50; color: white; }
+.no { background: #f44336; color: white; }
+
+.hidden { display: none; }
+.message { margin-top: 15px; font-weight: bold; }
+
+.meme {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.time-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-width: 55px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.time-box span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ff4d6d;
+}
+
+.time-box small {
+  font-size: 9px;
+  color: #777;
+}
+
+/* Dialogue top */
+#finalDialogue {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d6d;
+  background: #fff0f3;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Hug */
+.scene {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.character {
+  width: 130px;
+  transition: 1s;
+}
+
+.bride {
+  transform: translateX(-80px);
+}
+
+.hug {
+  transform: translateX(0) scale(1.1);
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  left: 50%;
+  border-radius: 2px;
+  animation: explode 1.5s ease-out forwards;
+}
+
+@keyframes explode {
+  0% { transform: translate(0,0); }
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(720deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div id="start">
+  <h2>💖 Shankari → Arun</h2>
+  <button class="btn yes" onclick="startApp()">Start 💌</button>
+</div>
+
+<div id="quiz" class="hidden">
+  <div id="question"></div>
+
+  <button class="btn yes" onclick="handleAnswer('yes')">Yes 💚</button>
+  <button id="noBtn" class="btn no" onclick="handleAnswer('no')">No 😜</button>
+
+  <div id="reaction" class="message"></div>
+  <img id="meme" class="meme hidden"/>
+</div>
+
+<div id="final" class="hidden">
+
+  <div id="finalDialogue" class="hidden"></div>
+
+  <h2>Arun… Will you marry me? 💍❤️</h2>
+
+  <button class="btn yes" onclick="finalYes()">YES 💖</button>
+  <button class="btn no" onclick="finalNo()">NO 😬</button>
+
+  <div id="finalMsg"></div>
+
+  <div id="finalCountdown" class="hidden">
+    <div class="countdown">
+      <div class="time-box"><span id="d"></span><small>Days</small></div>
+      <div class="time-box"><span id="h"></span><small>Hrs</small></div>
+      <div class="time-box"><span id="m"></span><small>Min</small></div>
+      <div class="time-box"><span id="s"></span><small>Sec</small></div>
+    </div>
+  </div>
+
+  <div id="hugScene" class="hidden">
+    <div class="scene">
+      <img id="bride" class="character bride" src="https://media.tenor.com/aiNveFHsM54AAAAM/happy-navratri.gif">
+    </div>
+
+    <img id="finalMeme" class="meme hidden">
+  </div>
+
+</div>
+
+</div>
+
+<script>
+
+const questions = [
+  "First time meet pannadhu nyabagam iruka? 😊",
+  "Naan unaku pidikuma? 😏",
+  "Enna patha smile varuma? 😄",
+  "Unaku naan mukkiyama? ❤️"
+];
+
+const yesMsgs = ["😏 Good boy!","🥰 Sweet!","😌 Nice!","😏 Correct!"];
+
+const noMsgs = [
+  "😡 Nyabagam illa?!",
+  "😤 Pidikala ah?!",
+  "😠 Smile varadhu ah?!",
+  "🔥 Mukkiyam illa ah?!"
+];
+
+let i = 0;
+let noClickCount = 0;
+
+function startApp() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("quiz").classList.remove("hidden");
+  showQuestion();
+}
+
+function resetNoButton() {
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "relative";
+  btn.style.left = "0px";
+  btn.style.top = "0px";
+}
+
+function showQuestion() {
+  document.getElementById("question").innerText = questions[i];
+  document.getElementById("reaction").innerText = "";
+  document.getElementById("meme").classList.add("hidden");
+
+  noClickCount = 0;
+  resetNoButton(); // ✅ FIX
+}
+
+function handleAnswer(type) {
+  const reaction = document.getElementById("reaction");
+  const meme = document.getElementById("meme");
+
+  if(type==="yes"){
+    noClickCount=0;
+    reaction.innerText = yesMsgs[i];
+    reaction.style.color="green";
+    meme.src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif";
+    meme.classList.remove("hidden");
+
+    setTimeout(()=>{
+      i++;
+      if(i<questions.length) showQuestion();
+      else {
+        document.getElementById("quiz").classList.add("hidden");
+        document.getElementById("final").classList.remove("hidden");
+      }
+    },1500);
+
+  } else {
+    noClickCount++;
+    reaction.innerText = noMsgs[i];
+    reaction.style.color="red";
+    meme.src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif";
+    meme.classList.remove("hidden");
+
+    if(noClickCount===1) reaction.innerText+=" 😒 Think...";
+    else if(noClickCount===2) reaction.innerText+=" 😑 Wrong...";
+    else {
+      reaction.innerText="😏 Taking as YES!";
+      reaction.style.color="green";
+
+      setTimeout(()=>{
+        i++;
+        if(i<questions.length) showQuestion();
+        else {
+          document.getElementById("quiz").classList.add("hidden");
+          document.getElementById("final").classList.remove("hidden");
+        }
+      },1500);
+    }
+  }
+}
+
+/* Run away NO */
+const noBtn = document.getElementById("noBtn");
+const card = document.querySelector(".card");
+
+function moveNo(){
+  const rect = card.getBoundingClientRect();
+  const x = Math.random()*(rect.width-100);
+  const y = Math.random()*(rect.height-40);
+
+  noBtn.style.position="absolute";
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+/* Confetti */
+function createConfetti(){
+  const colors=["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
+  for(let i=0;i<120;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    const angle=Math.random()*2*Math.PI;
+    const dist=Math.random()*250+100;
+    c.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    c.style.setProperty("--y",Math.sin(angle)*dist+"px");
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1500);
+  }
+}
+
+/* Countdown */
+const weddingDate = new Date("Dec 25, 2026 10:00").getTime();
+
+setInterval(()=>{
+  const now=new Date().getTime();
+  const diff=weddingDate-now;
+  if(diff<0) return;
+
+  document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("h").innerText=Math.floor((diff/(1000*60*60))%24);
+  document.getElementById("m").innerText=Math.floor((diff/(1000*60))%60);
+  document.getElementById("s").innerText=Math.floor((diff/1000)%60);
+},1000);
+
+/* Final */
+function finalYes(){
+  document.getElementById("finalMsg").innerText="❤️ Done!";
+  document.getElementById("finalCountdown").classList.remove("hidden");
+  document.getElementById("hugScene").classList.remove("hidden");
+
+  document.getElementById("finalDialogue").innerText="😎 Maatnada bambara katta mandaya 😂🔥";
+  document.getElementById("finalDialogue").classList.remove("hidden");
+
+  setTimeout(()=>document.getElementById("bride").classList.add("hug"),300);
+
+  createConfetti();
+
+  setTimeout(()=>{
+    document.getElementById("finalMeme").src="https://media.tenor.com/3St5s1Q8GgMAAAAM/tamil-comedy.gif";
+    document.getElementById("finalMeme").classList.remove("hidden");
+  },3000);
+}
+
+function finalNo(){
+  document.getElementById("finalMsg").innerText="😡 Escape illa!";
+}
+
+</script>
+
+</body>
+</html>
