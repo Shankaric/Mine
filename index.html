@@ -86,6 +86,11 @@
 <div class="main-card">
     <div id="start">
         <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Arambikalama? 😎</h2>
+        
+        <div class="media-viewer" style="height: 200px; margin-bottom: 20px;">
+            <img class="media-gif" src="./images/first.gif" alt="Starting...">
+        </div>
+
         <p style="color: #7f8c8d; margin-bottom: 30px;">Engagement mudinjachu... formal-ah pesi aachu... <br> <b>Ippo unmai-ah pesalama?</b></p>
         <button class="btn yes" onclick="beginQuiz()">Polam Right! 🚀</button>
     </div>
@@ -130,38 +135,37 @@
 </div>
 
 <script>
-// Updated steps with High-Availability GIPHY Links
 const steps = [
     { 
         q: "Engagement-ku munnadi, en photos-ah zoom panni panni 'Stalk' pannirukingala? 😉",
-        yesMsg: "Hahaha.. Maatnikingala! 😂", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/H5C8CevNMbpBqg57Fv/giphy.gif",
-        noMsg: "Poi sollatheenga Arun! 🤨", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/BEob5qwFkSJ7G/giphy.gif"
+        yesMsg: "Hahaha.. Maatnikingala! 😂", yesGif: "./images/ques1yes.gif",
+        noMsg: "Poi sollatheenga Arun! 🤨", noGif: "./images/ques1yno.gif"
     },  
     { 
         q: "Naan senja sapadu sumaar-ah irunthalum, 'Chef Damu range-ku iruku' nu poi solluvinga la? 🥘😉",
-        yesMsg: "Ayyoo.. samathu! Happy-o happy! ❤️", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/nuRXXYY02564u7Ydu1/giphy.gif",
-        noMsg: "Saptu dhaan aaganum.. vera vazhi illa! 😤", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3j1cQmHH21pMEmgd0O/giphy.gif"
+        yesMsg: "Ayyoo.. samathu! Happy-o happy! ❤️", yesGif: "./images/ques2yes.gif",
+        noMsg: "Saptu dhaan aaganum.. vera vazhi illa! 😤", noGif: "./images/ques2no.gif"
     },
     { 
         q: "Kalyanathuku apuram shopping ku koopta, moonja thooki vechikama kooda varuvinga la? 🛍️",
-        yesMsg: "Adhu dhaan nalla payyanuku azhagu! 🥰", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/v8ClvH842G136/giphy.gif",
-        noMsg: "Ungaluku credit card bill vara pothu paarunga! 👊", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHY0Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/UoSWmCnUqL12E/giphy.gif"
+        yesMsg: "Adhu dhaan nalla payyanuku azhagu! 🥰", yesGif: "./images/ques3yes.gif",
+        noMsg: "Ungaluku credit card bill vara pothu paarunga! 👊", noGif: "./images/ques3no.gif"
     },
     { 
         q: "Marriage-ku apram sandai vantha, apovachum 'SORRY' soluvingala? 🥺🙏",
         evade: true,
-        yesMsg: "Idha naan record panniten! Marakathinga! ✨", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/BEob5qwFkSJ7G/giphy.gif",
-        noMsg: "Escape-e illa boss! 😜", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/u04bOWfyEywH6/giphy.gif"
+        yesMsg: "Idha naan record panniten! Marakathinga! ✨", yesGif: "./images/ques4yes.gif",
+        noMsg: "Escape-e illa boss! 😜", noGif: "./images/ques4no.gif"
     },
     { 
         q: "Morning seekiram enthirichi enakku tea pottu tharuva-la? (Illana late-ah enthirikalama? 😴)",
-        yesMsg: "Rendu perum serndhu thoongalam! deal! 🤝", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/YmZOBDY3C772w/giphy.gif",
-        noMsg: "Enakku tea venume! 🥺", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/u04bOWfyEywH6/giphy.gif"
+        yesMsg: "Rendu perum serndhu thoongalam! deal! 🤝", yesGif: "./images/ques5yes.gif",
+        noMsg: "Enakku tea venume! 🥺", noGif: "./images/ques5no.gif"
     },
     { 
         q: "Last-ah oru kelvi... Intha veetula eppovum 'Pondatti solra dhaan Vedha vaakku' nu follow pannuva-la? 👑😈",
-        yesMsg: "Correct! Life-long happy-ah irukalam! 😍", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/fW8q6N6lR5V2RInS7I/giphy.gif",
-        noMsg: "Try panni paarunga.. Puriyum! 😂", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/fW8q6N6lR5V2RInS7I/giphy.gif"
+        yesMsg: "Correct! Life-long happy-ah irukalam! 😍", yesGif: "./images/ques6yes.gif",
+        noMsg: "Try panni paarunga.. Puriyum! 😂", noGif: "./images/ques6no.gif"
     }
 ];
 
