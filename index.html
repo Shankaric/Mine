@@ -1,341 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S ❤️ A | Arambikalama? 😎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffe4ec, #fff5f0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+    <style>
+        :root {
+            --accent: #ff4d6d;
+            --soft-pink: #fff0f3;
+            --text-main: #2c3e50;
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
 
-.card {
-  width: 95%;
-  max-width: 420px;
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  position: relative;
-}
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fef1f3 0%, #fffbf2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-.btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 20px;
-  margin: 5px;
-  cursor: pointer;
-}
-.yes { background: #4CAF50; color: white; }
-.no { background: #f44336; color: white; }
+        .main-card {
+            width: 92%;
+            max-width: 420px;
+            background: var(--glass-white);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+        }
 
-.hidden { display: none; }
-.message { margin-top: 15px; font-weight: bold; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--text-main); font-size: 1.8rem; margin-bottom: 20px; }
 
-.meme {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 10px;
-}
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
 
-/* Countdown */
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
-}
+        .yes { background: var(--accent); color: white; box-shadow: 0 6px 20px rgba(255, 77, 109, 0.3); }
+        .no { background: white; color: #95a5a6; border: 1px solid #eee; position: relative; }
 
-.time-box {
-  background: #fff;
-  border-radius: 8px;
-  padding: 6px 8px;
-  min-width: 55px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+        .hidden { display: none; }
+        .invisible { visibility: hidden; opacity: 0; height: 0; margin: 0; transition: 0.3s; }
+        .visible { visibility: visible; opacity: 1; height: 220px; margin: 20px 0; }
 
-.time-box span {
-  font-size: 14px;
-  font-weight: bold;
-  color: #ff4d6d;
-}
+        .media-viewer {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #eee;
+        }
 
-.time-box small {
-  font-size: 9px;
-  color: #777;
-}
+        .media-gif { width: 100%; height: 100%; object-fit: cover; }
 
-/* Dialogue top */
-#finalDialogue {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff4d6d;
-  background: #fff0f3;
-  padding: 10px;
-  border-radius: 12px;
-}
+        .countdown-modern { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
+        .box-time { background: white; border-radius: 12px; padding: 10px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .box-time span { display: block; font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+        .box-time small { font-size: 0.6rem; color: #999; text-transform: uppercase; }
 
-/* Hug */
-.scene {
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.character {
-  width: 130px;
-  transition: 1s;
-}
-
-.bride {
-  transform: translateX(-80px);
-}
-
-.hug {
-  transform: translateX(0) scale(1.1);
-}
-
-/* Confetti */
-.confetti {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  top: 50%;
-  left: 50%;
-  border-radius: 2px;
-  animation: explode 1.5s ease-out forwards;
-}
-
-@keyframes explode {
-  0% { transform: translate(0,0); }
-  100% {
-    transform: translate(var(--x), var(--y)) rotate(720deg);
-    opacity: 0;
-  }
-}
-</style>
+        .confetti { position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-
-<div id="start">
-  <h2>💖 Shankari → Arun</h2>
-  <button class="btn yes" onclick="startApp()">Start 💌</button>
-</div>
-
-<div id="quiz" class="hidden">
-  <div id="question"></div>
-
-  <button class="btn yes" onclick="handleAnswer('yes')">Yes 💚</button>
-  <button id="noBtn" class="btn no" onclick="handleAnswer('no')">No 😜</button>
-
-  <div id="reaction" class="message"></div>
-  <img id="meme" class="meme hidden"/>
-</div>
-
-<div id="final" class="hidden">
-
-  <div id="finalDialogue" class="hidden"></div>
-
-  <h2>Arun… Will you marry me? 💍❤️</h2>
-
-  <button class="btn yes" onclick="finalYes()">YES 💖</button>
-  <button class="btn no" onclick="finalNo()">NO 😬</button>
-
-  <div id="finalMsg"></div>
-
-  <div id="finalCountdown" class="hidden">
-    <div class="countdown">
-      <div class="time-box"><span id="d"></span><small>Days</small></div>
-      <div class="time-box"><span id="h"></span><small>Hrs</small></div>
-      <div class="time-box"><span id="m"></span><small>Min</small></div>
-      <div class="time-box"><span id="s"></span><small>Sec</small></div>
-    </div>
-  </div>
-
-  <div id="hugScene" class="hidden">
-    <div class="scene">
-      <img id="bride" class="character bride" src="https://media.tenor.com/aiNveFHsM54AAAAM/happy-navratri.gif">
+<div class="main-card">
+    <div id="start">
+        <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Arambikalama? 😎</h2>
+        <p style="color: #7f8c8d; margin-bottom: 30px;">Engagement mudinjachu... formal-ah pesi aachu... <br> <b>Ippo unmai-ah pesalama?</b></p>
+        <button class="btn yes" onclick="beginQuiz()">Polam Right! 🚀</button>
     </div>
 
-    <img id="finalMeme" class="meme hidden">
-  </div>
+    <div id="quiz" class="hidden">
+        <h3 id="question" style="color: var(--text-main); font-family: 'Playfair Display'; min-height: 80px; font-size: 1.15rem;"></h3>
+        
+        <div id="mediaArea" class="media-viewer invisible">
+            <img id="gifBox" class="media-gif" src=""/>
+        </div>
 
-</div>
+        <div id="reaction" style="color: var(--accent); font-weight: 600; min-height: 25px; margin-bottom: 10px; font-size: 0.95rem;"></div>
+        
+        <div id="btns">
+            <button class="btn yes" onclick="handleInput('yes')">Kandipa! ❤️</button>
+            <button id="noBtn" class="btn no" onmouseenter="checkEvade()" onclick="handleInput('no')">No 😜</button>
+        </div>
+    </div>
 
+    <div id="final" class="hidden">
+        <h2 id="finalTitle">Sari, Ellaam Okay...</h2>
+        <div id="finalDecision">
+            <p style="color: #666;">Arranged marriage-nu formal-ah mudika vendam...</p>
+            <h1 style="font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--accent); margin-top: 0;">Arun, Will You Marry Me? 💍</h1>
+            <button class="btn yes" onclick="acceptFinal()">YES, I WILL! ❤️</button>
+        </div>
+
+        <div id="marriageDetails" class="hidden">
+            <div class="media-viewer visible">
+                <img class="media-gif" style="object-fit: contain; padding: 10px;" 
+                src="https://img.freepik.com/premium-vector/adorable-indian-wedding-couple-cartoon-bride-red-saree-groom-cream-sherwani-holding-hand_1153643-497.jpg?w=740">
+            </div>
+            <h3 style="color: var(--accent); margin-top: 0; font-family: 'Playfair Display';">😎 Maatnada bambara katta mandaya!</h3>
+            <div class="countdown-modern">
+                <div class="box-time"><span id="d"></span><small>Days</small></div>
+                <div class="box-time"><span id="h"></span><small>Hrs</small></div>
+                <div class="box-time"><span id="m"></span><small>Min</small></div>
+                <div class="box-time"><span id="s"></span><small>Sec</small></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-
-const questions = [
-  "First time meet pannadhu nyabagam iruka? 😊",
-  "Naan unaku pidikuma? 😏",
-  "Enna patha smile varuma? 😄",
-  "Unaku naan mukkiyama? ❤️"
+// Updated steps with High-Availability GIPHY Links
+const steps = [
+    { 
+        q: "Engagement-ku munnadi, en photos-ah zoom panni panni 'Stalk' pannirukingala? 😉",
+        yesMsg: "Hahaha.. Maatnikingala! 😂", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/H5C8CevNMbpBqg57Fv/giphy.gif",
+        noMsg: "Poi sollatheenga Arun! 🤨", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/BEob5qwFkSJ7G/giphy.gif"
+    },  
+    { 
+        q: "Naan senja sapadu sumaar-ah irunthalum, 'Chef Damu range-ku iruku' nu poi solluvinga la? 🥘😉",
+        yesMsg: "Ayyoo.. samathu! Happy-o happy! ❤️", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/nuRXXYY02564u7Ydu1/giphy.gif",
+        noMsg: "Saptu dhaan aaganum.. vera vazhi illa! 😤", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3j1cQmHH21pMEmgd0O/giphy.gif"
+    },
+    { 
+        q: "Kalyanathuku apuram shopping ku koopta, moonja thooki vechikama kooda varuvinga la? 🛍️",
+        yesMsg: "Adhu dhaan nalla payyanuku azhagu! 🥰", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/v8ClvH842G136/giphy.gif",
+        noMsg: "Ungaluku credit card bill vara pothu paarunga! 👊", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHY0Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/UoSWmCnUqL12E/giphy.gif"
+    },
+    { 
+        q: "Marriage-ku apram sandai vantha, apovachum 'SORRY' soluvingala? 🥺🙏",
+        evade: true,
+        yesMsg: "Idha naan record panniten! Marakathinga! ✨", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/BEob5qwFkSJ7G/giphy.gif",
+        noMsg: "Escape-e illa boss! 😜", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/u04bOWfyEywH6/giphy.gif"
+    },
+    { 
+        q: "Morning seekiram enthirichi enakku tea pottu tharuva-la? (Illana late-ah enthirikalama? 😴)",
+        yesMsg: "Rendu perum serndhu thoongalam! deal! 🤝", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/YmZOBDY3C772w/giphy.gif",
+        noMsg: "Enakku tea venume! 🥺", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/u04bOWfyEywH6/giphy.gif"
+    },
+    { 
+        q: "Last-ah oru kelvi... Intha veetula eppovum 'Pondatti solra dhaan Vedha vaakku' nu follow pannuva-la? 👑😈",
+        yesMsg: "Correct! Life-long happy-ah irukalam! 😍", yesGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/fW8q6N6lR5V2RInS7I/giphy.gif",
+        noMsg: "Try panni paarunga.. Puriyum! 😂", noGif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Y2Ynh4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bnV4Ynd5ZHR2cnR4bm0mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/fW8q6N6lR5V2RInS7I/giphy.gif"
+    }
 ];
 
-const yesMsgs = ["😏 Good boy!","🥰 Sweet!","😌 Nice!","😏 Correct!"];
+let currentStep = 0;
+let isWaiting = false;
 
-const noMsgs = [
-  "😡 Nyabagam illa?!",
-  "😤 Pidikala ah?!",
-  "😠 Smile varadhu ah?!",
-  "🔥 Mukkiyam illa ah?!"
-];
-
-let i = 0;
-let noClickCount = 0;
-
-function startApp() {
-  document.getElementById("start").style.display = "none";
-  document.getElementById("quiz").classList.remove("hidden");
-  showQuestion();
+function beginQuiz() {
+    document.getElementById("start").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    renderStep();
 }
 
-function resetNoButton() {
-  const btn = document.getElementById("noBtn");
-  btn.style.position = "relative";
-  btn.style.left = "0px";
-  btn.style.top = "0px";
+function renderStep() {
+    isWaiting = false;
+    document.getElementById("question").innerText = steps[currentStep].q;
+    document.getElementById("mediaArea").className = "media-viewer invisible";
+    document.getElementById("reaction").innerText = "";
+    document.getElementById("noBtn").style.transform = "translate(0,0)";
 }
 
-function showQuestion() {
-  document.getElementById("question").innerText = questions[i];
-  document.getElementById("reaction").innerText = "";
-  document.getElementById("meme").classList.add("hidden");
+function handleInput(choice) {
+    if(isWaiting) return;
 
-  noClickCount = 0;
-  resetNoButton(); // ✅ FIX
+    const mediaArea = document.getElementById("mediaArea");
+    const gifBox = document.getElementById("gifBox");
+    const reaction = document.getElementById("reaction");
+    const data = steps[currentStep];
+
+    if(choice === 'yes') {
+        isWaiting = true;
+        reaction.innerText = data.yesMsg;
+        gifBox.src = data.yesGif;
+        mediaArea.className = "media-viewer visible";
+        setTimeout(nextStep, 2000);
+    } else {
+        reaction.innerText = data.noMsg;
+        gifBox.src = data.noGif;
+        mediaArea.className = "media-viewer visible";
+        if(data.evade) evadeNo();
+    }
 }
 
-function handleAnswer(type) {
-  const reaction = document.getElementById("reaction");
-  const meme = document.getElementById("meme");
-
-  if(type==="yes"){
-    noClickCount=0;
-    reaction.innerText = yesMsgs[i];
-    reaction.style.color="green";
-    meme.src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif";
-    meme.classList.remove("hidden");
-
-    setTimeout(()=>{
-      i++;
-      if(i<questions.length) showQuestion();
-      else {
+function nextStep() {
+    currentStep++;
+    if(currentStep < steps.length) {
+        renderStep();
+    } else {
         document.getElementById("quiz").classList.add("hidden");
         document.getElementById("final").classList.remove("hidden");
-      }
-    },1500);
-
-  } else {
-    noClickCount++;
-    reaction.innerText = noMsgs[i];
-    reaction.style.color="red";
-    meme.src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif";
-    meme.classList.remove("hidden");
-
-    if(noClickCount===1) reaction.innerText+=" 😒 Think...";
-    else if(noClickCount===2) reaction.innerText+=" 😑 Wrong...";
-    else {
-      reaction.innerText="😏 Taking as YES!";
-      reaction.style.color="green";
-
-      setTimeout(()=>{
-        i++;
-        if(i<questions.length) showQuestion();
-        else {
-          document.getElementById("quiz").classList.add("hidden");
-          document.getElementById("final").classList.remove("hidden");
-        }
-      },1500);
     }
-  }
 }
 
-/* Run away NO */
-const noBtn = document.getElementById("noBtn");
-const card = document.querySelector(".card");
-
-function moveNo(){
-  const rect = card.getBoundingClientRect();
-  const x = Math.random()*(rect.width-100);
-  const y = Math.random()*(rect.height-40);
-
-  noBtn.style.position="absolute";
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
+function checkEvade() {
+    if(steps[currentStep].evade) evadeNo();
 }
 
-noBtn.addEventListener("mouseenter", moveNo);
-noBtn.addEventListener("touchstart", moveNo);
-
-/* Confetti */
-function createConfetti(){
-  const colors=["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
-  for(let i=0;i<120;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    const angle=Math.random()*2*Math.PI;
-    const dist=Math.random()*250+100;
-    c.style.setProperty("--x",Math.cos(angle)*dist+"px");
-    c.style.setProperty("--y",Math.sin(angle)*dist+"px");
-    c.style.background=colors[Math.floor(Math.random()*colors.length)];
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),1500);
-  }
+function evadeNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.transform = `translate(${Math.random() * 160 - 80}px, ${Math.random() * 160 - 80}px)`;
 }
 
-/* Countdown */
-const weddingDate = new Date("Dec 25, 2026 10:00").getTime();
-
-setInterval(()=>{
-  const now=new Date().getTime();
-  const diff=weddingDate-now;
-  if(diff<0) return;
-
-  document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("h").innerText=Math.floor((diff/(1000*60*60))%24);
-  document.getElementById("m").innerText=Math.floor((diff/(1000*60))%60);
-  document.getElementById("s").innerText=Math.floor((diff/1000)%60);
-},1000);
-
-/* Final */
-function finalYes(){
-  document.getElementById("finalMsg").innerText="❤️ Done!";
-  document.getElementById("finalCountdown").classList.remove("hidden");
-  document.getElementById("hugScene").classList.remove("hidden");
-
-  document.getElementById("finalDialogue").innerText="😎 Maatnada bambara katta mandaya 😂🔥";
-  document.getElementById("finalDialogue").classList.remove("hidden");
-
-  setTimeout(()=>document.getElementById("bride").classList.add("hug"),300);
-
-  createConfetti();
-
-  setTimeout(()=>{
-    document.getElementById("finalMeme").src="https://media.tenor.com/3St5s1Q8GgMAAAAM/tamil-comedy.gif";
-    document.getElementById("finalMeme").classList.remove("hidden");
-  },3000);
+function acceptFinal() {
+    document.getElementById("finalDecision").classList.add("hidden");
+    document.getElementById("finalTitle").innerText = "Locked & Loaded! ❤️";
+    document.getElementById("marriageDetails").classList.remove("hidden");
+    startConfetti();
 }
 
-function finalNo(){
-  document.getElementById("finalMsg").innerText="😡 Escape illa!";
+function startConfetti() {
+    for(let i=0; i<80; i++) {
+        const conf = document.createElement('div');
+        conf.style.cssText = `position:fixed; width:10px; height:10px; top:-10px; left:${Math.random()*100}vw; background:${['#ff4d6d','#ffb3c1','#fad0c4'][Math.floor(Math.random()*3)]}; border-radius:50%; pointer-events:none; z-index:9999;`;
+        document.body.appendChild(conf);
+        
+        const animation = conf.animate([
+            { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+            { transform: `translateY(110vh) rotate(360deg)`, opacity: 0 }
+        ], { duration: Math.random() * 2000 + 1000, easing: 'linear' });
+        
+        animation.onfinish = () => conf.remove();
+    }
 }
 
+const targetDate = new Date("May 18, 2026 06:00:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if (diff < 0) return;
+    document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("h").innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    document.getElementById("m").innerText = Math.floor((diff / (1000 * 60)) % 60);
+    document.getElementById("s").innerText = Math.floor((diff / 1000) % 60);
+}, 1000);
 </script>
-
 </body>
 </html>
